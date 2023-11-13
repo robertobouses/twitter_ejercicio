@@ -8,6 +8,8 @@ import (
 type APP interface {
 	ConfigurePassword(id string, user entity.User) (entity.User, error)
 	CreateAccount(user entity.User) (entity.User, error)
+	GetAccountId(id string) (entity.User, error)
+	GetAllTweets() ([]entity.Tweet, error)
 	GetFollowingTweets() ([]entity.Tweet, error)
 	GetOwnTweets() ([]entity.Tweet, error)
 	PublishTweet(tweet entity.Tweet) (entity.Tweet, error)

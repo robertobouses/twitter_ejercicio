@@ -6,9 +6,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/robertobouses/twitter_ejercicio/app"
+	"github.com/robertobouses/twitter_ejercicio/entity"
 	"github.com/robertobouses/twitter_ejercicio/http"
 	"github.com/robertobouses/twitter_ejercicio/internal"
 	"github.com/robertobouses/twitter_ejercicio/repository"
+	_ "gorm.io/gorm"
 )
 
 func main() {
@@ -20,23 +22,30 @@ func main() {
 	fmt.Println("DB_DATABASE:", os.Getenv("DB_DATABASE"))
 
 	db, err := internal.NewPostgres(internal.DBConfig{
-		User:     os.Getenv("DB_USER"),
-		Pass:     os.Getenv("DB_PASS"),
-		Host:     os.Getenv("DB_HOST"),
-		Port:     os.Getenv("DB_PORT"),
-		Database: os.Getenv("DB_DATABASE"),
+		User:     "postgres",
+		Pass:     "mysecretpassword",
+		Host:     "localhost",
+		Port:     "5432",
+		Database: "twitter_ejercicio",
+
+		// User:     os.Getenv("DB_USER"),
+		// Pass:     os.Getenv("DB_PASS"),
+		// Host:     os.Getenv("DB_HOST"),
+		// Port:     os.Getenv("DB_PORT"),
+		// Database: os.Getenv("DB_DATABASE"),
 	})
 
 	if err != nil {
 		panic(err)
 	}
-	defer db.Close()
+	//defer db.Close()
 
 	var repo repository.REPOSITORY
 	repo, err = repository.NewRepository(db)
 	if err != nil {
 		panic(err)
 	}
+
 	var appController app.APP
 	var httpController http.HTTP
 
@@ -45,12 +54,17 @@ func main() {
 
 	server := gin.Default()
 
-	db.AutoMigrate(&entity.User{}, &entity.Tweet)
+	db.AutoMigrate(&entity.User{}, &entity.Tweet{})
 
-	server.POST("/createAccount", httpController.CreateAccount)
-	server.PUT("/configurePassword/:id", httpController.ConfigurePassword)
-	server.POST("/publishTweet", httpController.PublishTweet)
+	server.POST("/account", httpController.CreateAccount)
+	server.GET("/account/:id", httpController.GetAccountId)
+	server.POST("/tweet", httpController.PublishTweet)
+
+	server.GET("/tweet", httpController.GetAllTweets)
 	server.GET("/getOwnTweets", httpController.GetOwnTweets)
+
+	server.PUT("/configurePassword/:id", httpController.ConfigurePassword)
+
 	server.GET("/getFollowingTweets", httpController.GetFollowingTweets)
 
 	server.Run(":8080")

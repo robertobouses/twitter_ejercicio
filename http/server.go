@@ -8,6 +8,8 @@ import (
 type HTTP interface {
 	ConfigurePassword(c *gin.Context)
 	CreateAccount(c *gin.Context)
+	GetAccountId(c *gin.Context)
+	GetAllTweets(c *gin.Context)
 	GetFollowingTweets(c *gin.Context)
 	GetOwnTweets(c *gin.Context)
 	PublishTweet(c *gin.Context)

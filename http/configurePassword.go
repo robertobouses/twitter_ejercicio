@@ -9,7 +9,6 @@ func (h *Http) ConfigurePassword(c *gin.Context) {
 	id := c.Param("id")
 	var user entity.User
 
-	// Llamar a la lógica de negocio
 	result, err := h.service.ConfigurePassword(id, user)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
