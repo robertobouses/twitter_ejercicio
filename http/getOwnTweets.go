@@ -1,9 +1,16 @@
 package http
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
-func getOwnTweets(c *gin.Context) {
-	var tweets []Tweet
-	db.Where("user_id = ?", 1).Find(&tweets) // Hardcoded user ID for simplicity
-	c.JSON(200, tweets)
+func (h *Http) GetOwnTweets(c *gin.Context) {
+
+	result, err := h.service.GetOwnTweets()
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, result)
 }

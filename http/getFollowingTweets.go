@@ -1,9 +1,16 @@
 package http
 
-func getFollowingTweets(c *gin.Context) {
-	var user User
-	db.Preload("Following").First(&user, 1) // Hardcoded user ID for simplicity
-	var tweets []Tweet
-	db.Where("user_id IN (?)", user.Following).Find(&tweets)
-	c.JSON(200, tweets)
+import (
+	"github.com/gin-gonic/gin"
+)
+
+func (h *Http) GetFollowingTweets(c *gin.Context) {
+	// Llamar a la lógica de negocio
+	result, err := h.service.GetFollowingTweets()
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, result)
 }
