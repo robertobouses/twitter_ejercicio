@@ -1,0 +1,3 @@
+module github.com/robertobouses/twitter_ejercicio
+
+go 1.20
