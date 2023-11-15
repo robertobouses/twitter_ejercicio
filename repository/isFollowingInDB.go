@@ -13,7 +13,9 @@ func (r *Repository) IsFollowingInDB(db *gorm.DB, currentUser, userToFollow enti
 	}
 
 	var count int64
-	if err := db.Model(&currentUser).Where("id = ? AND user_following_id = ?", currentUser.ID, userToFollow.ID).Count(&count).Error; err != nil {
+	if err := db.Model(&currentUser).Where("id = ?", currentUser.ID).
+		Joins("JOIN user_followers ON user_followers.user_id = ? AND user_followers.following_id = ?", currentUser.ID, userToFollow.ID).
+		Count(&count).Error; err != nil {
 		return false, err
 	}
 

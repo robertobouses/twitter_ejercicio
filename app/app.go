@@ -3,7 +3,6 @@ package app
 import (
 	"github.com/robertobouses/twitter_ejercicio/entity"
 	"github.com/robertobouses/twitter_ejercicio/repository"
-	"gorm.io/gorm"
 )
 
 type APP interface {
@@ -19,7 +18,6 @@ type APP interface {
 
 type Service struct {
 	repo repository.REPOSITORY
-	db   *gorm.DB
 }
 
 func NewAPP(repo repository.REPOSITORY) APP {
