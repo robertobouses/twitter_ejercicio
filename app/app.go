@@ -10,7 +10,7 @@ type APP interface {
 	CreateAccount(user entity.User) (entity.User, error)
 	GetAccountId(id string) (entity.User, error)
 	GetAllTweets() ([]entity.Tweet, error)
-	GetFollowingTweets() ([]entity.Tweet, error)
+	GetFollowingTweets(id string) ([]entity.Tweet, error)
 	GetOwnTweets() ([]entity.Tweet, error)
 	PostIdFollow(currentUser, userToFollow entity.User) (entity.User, error)
 	PublishTweet(tweet entity.Tweet) (entity.Tweet, error)

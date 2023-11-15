@@ -5,7 +5,8 @@ import (
 )
 
 func (h *Http) GetFollowingTweets(c *gin.Context) {
-	result, err := h.service.GetFollowingTweets()
+	id := c.Param("id")
+	result, err := h.service.GetFollowingTweets(id)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return

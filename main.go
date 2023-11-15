@@ -65,9 +65,9 @@ func main() {
 
 	server.POST("/:id/follow", httpController.PostIdFollow)
 
-	server.PUT("/configurePassword/:id", httpController.ConfigurePassword)
+	server.GET(":id/timeline", httpController.GetFollowingTweets)
 
-	server.GET("/getFollowingTweets", httpController.GetFollowingTweets)
+	server.PUT("/configurePassword/:id", httpController.ConfigurePassword)
 
 	server.Run(":8080")
 }

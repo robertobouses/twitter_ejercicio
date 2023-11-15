@@ -14,9 +14,8 @@ type REPOSITORY interface {
 	CreateTweet(tweet entity.Tweet) (entity.Tweet, error)
 	GetAccountId(id string) (entity.User, error)
 	GetAllTweets() ([]entity.Tweet, error)
-	GetFollowingTweets() ([]entity.Tweet, error)
+	GetFollowingTweets(id string) ([]entity.Tweet, error)
 	GetOwnTweets() ([]entity.Tweet, error)
-	//IsFollowingInDB(db *gorm.DB, currentUser, userToFollow entity.User) (bool, error)
 	PostIdFollow(currentUser, userToFollow entity.User) (entity.User, error)
 }
 
