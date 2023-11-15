@@ -12,4 +12,4 @@ func (Tweet) TableName() string {
 	return "tweet"
 }
 
-//evito que gorm ponga tweets como nombre
+//evito que gorm ponga "tweets" como nombre

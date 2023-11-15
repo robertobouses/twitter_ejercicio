@@ -17,6 +17,7 @@ type REPOSITORY interface {
 	GetFollowingTweets(id string) ([]entity.Tweet, error)
 	GetOwnTweets() ([]entity.Tweet, error)
 	PostIdFollow(currentUser, userToFollow entity.User) (entity.User, error)
+	PostIdUnfollow(currentUser, userToUnfollow entity.User) (entity.User, error)
 }
 
 type Repository struct {

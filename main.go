@@ -27,12 +27,6 @@ func main() {
 		Host:     "localhost",
 		Port:     "5432",
 		Database: "twitter_ejercicio",
-
-		// User:     os.Getenv("DB_USER"),
-		// Pass:     os.Getenv("DB_PASS"),
-		// Host:     os.Getenv("DB_HOST"),
-		// Port:     os.Getenv("DB_PORT"),
-		// Database: os.Getenv("DB_DATABASE"),
 	})
 
 	if err != nil {
@@ -64,6 +58,7 @@ func main() {
 	server.GET("/getOwnTweets", httpController.GetOwnTweets)
 
 	server.POST("/:id/follow", httpController.PostIdFollow)
+	server.POST("/:id/unfollow", httpController.PostIdUnfollow)
 
 	server.GET(":id/timeline", httpController.GetFollowingTweets)
 
