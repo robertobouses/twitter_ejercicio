@@ -12,6 +12,7 @@ type HTTP interface {
 	GetAllTweets(c *gin.Context)
 	GetFollowingTweets(c *gin.Context)
 	GetOwnTweets(c *gin.Context)
+	PostIdFollow(c *gin.Context)
 	PublishTweet(c *gin.Context)
 }
 

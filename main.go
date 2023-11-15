@@ -63,6 +63,8 @@ func main() {
 	server.GET("/tweet", httpController.GetAllTweets)
 	server.GET("/getOwnTweets", httpController.GetOwnTweets)
 
+	server.POST("/:id/follow", httpController.PostIdFollow)
+
 	server.PUT("/configurePassword/:id", httpController.ConfigurePassword)
 
 	server.GET("/getFollowingTweets", httpController.GetFollowingTweets)
